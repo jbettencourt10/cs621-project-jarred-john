@@ -1,0 +1,51 @@
+\documentclass{article}
+
+% Language setting
+% Replace `english' with e.g. `spanish' to change the document language
+\usepackage[english]{babel}
+
+% Set page size and margins
+% Replace `letterpaper' with `a4paper' for UK/EU standard size
+\usepackage[letterpaper,top=2cm,bottom=2cm,left=3cm,right=3cm,marginparwidth=1.75cm]{geometry}
+
+% Useful packages
+\usepackage{amsmath}
+\usepackage{graphicx}
+\usepackage[colorlinks=true, allcolors=blue]{hyperref}
+
+\title{Verification-Driven Sound Refactoring for Readability}
+\author{Jarred Bettencourt \& John Broderick}
+
+\begin{document}
+\maketitle
+
+% \begin{abstract}
+% TODO
+
+% \end{abstract}
+
+\section{Research Question(s)}
+
+The research questions which our project aims to answer are listed below, ordered in terms of decreasing importance.
+
+\begin{enumerate}
+    \item Can the automated process of altering code by generating mutants, verifying them for correctness, and then choosing the mutant based on a readability heuristic result in code with similar correctness but higher readability?
+    \item Is it feasible (with regards to human and computational factors) to implement our proposed workflow into an industrial or academic workflow? What advantages and disadvantages are introduced with our project included into a typical workflow? 
+    \item What other metrics (maintainability, complexity, etc.) would be useful to try to optimize for rather than readability? 
+    \item Does our proposed process to improve readability work better or worse on certain projects? For instance, does it work better on large or small projects?
+\end{enumerate}
+
+\section{Key-Idea}
+The main idea of our project is to perform Verification-Driven Sound Refactoring, but making an emphasis to assess the readabilty of the generated mutants, given that the mutants are behaviorally equivalent to the original code. As a group that is interested in open source software, we would like to help ensure that readability of programs (especially programs with a large sense of scale) remains high, which lowers the bar for new contributors who want to learn a codebase. To do this, we will choose a mutation engine, a method to prove equivalence of programs, an adequate test suite, a readability heuristic, and 5-10 open source projects to test our findings with.
+
+\section{Evaluation}
+Our evaluation step consists of multiple steps, which all concern themselves with different aspects of our project.
+\begin{enumerate}
+    \item We will first develop our project, which includes picking a suitable mutation program, a suitable test suite, and an adequate method to verify behavior equivalence of the mutant to the original program. All of these operations will be able to be done with one command.
+    \item  Additionally, we will decide on a satisfactory heuristic for gauging readability of a particular code segment.
+    \item We will then choose around 5-10 reputable open source github projects with varying degrees of characteristics (project size, commit history, number of contributors, etc.)
+    \item Finally, the project will be run on a subset of the files in the aforementioned projects, and we will determine if introducing our readability heuristic did in fact improve the readability of the files we applied it to.
+\end{enumerate}
+
+
+\end{document}
