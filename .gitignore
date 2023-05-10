@@ -163,3 +163,4 @@ cython_debug/
 *.pdf
 
 test_data/*
+__pycache__/
