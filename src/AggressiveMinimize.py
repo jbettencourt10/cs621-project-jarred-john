@@ -7,7 +7,8 @@ class AggressiveMinimize:
         self.packed_id = 0
         self.packed_params = {}
 
-# Takes in list of type Function, returns list of type Edge
+    # Takes in list of type Function, returns list of type Edge
+    # Iterates over every pair of parameters in a function, creating an edge. Existing edges increment the cost
     def build_edges(self):
         edges = {}
         for func in self.functions:
@@ -39,24 +40,24 @@ class AggressiveMinimize:
         v2 = edges[0].v2
 
         # If both are packed
-        if v1.packed and v2.packed:
+        if v1.packed and v2.packed:  # Unpack and union the set
             packed_v1 = self.packed_params[v1.name]
             packed_v2 = self.packed_params[v2.name]
             combined = packed_v1.union(packed_v2)
-        elif v1.packed:  # v1 is packed
+        elif v1.packed:  # v1 is packed - add v2 to the set of v1
             packed_v1 = self.packed_params[v1.name]
             packed_v1.add(v2)
             combined = packed_v1
-        elif v2.packed:  # v2 is packed
+        elif v2.packed:  # v2 is packed - add v1 to the set of v2
             packed_v2 = self.packed_params[v2.name]
             packed_v2.add(v1)
             combined = packed_v2
-        else:  # Neither is packed
+        else:  # Neither is packed - create a set consisting of v1 and v2
             combined = {v1, v2}
-        pname = "pack" + str(self.packed_id)
-        self.packed_id += 1
-        new_param = Parameter(pname, "", True)
-        self.packed_params[pname] = combined
+        pname = "pack" + str(self.packed_id)  # Create a unique name for the pack parameter, based on incrementing ID
+        self.packed_id += 1  # Increment ID every time a packing is created
+        new_param = Parameter(pname, "", True)  # Create parameter and set packing to true
+        self.packed_params[pname] = combined  # Add pack parameter mapping to the set of parameters it has
 
         # Update function parameters
         for function in self.functions:
