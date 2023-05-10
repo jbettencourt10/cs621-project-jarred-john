@@ -20,5 +20,10 @@ class BasicParamsCase(TestCase):
 class MultiLineCase(TestCase):
     def test_two_functions(self):
         self.assertListEqual([["int myFunc1", "bool myVarA", "String myVarB", "float myVarC", "", "", ""], ["arr myFunc2", "double otherVarA", "bool otherVarB", "", "", "", ""]], source_parser.parse_signature("int myFunc1(bool myVarA, String myVarB, float myVarC) {\nx++;\n}\n    arr myFunc2( double otherVarA, bool otherVarB)\n{\n}", 6))
-    def test_stuff_in_between(self):
+    def test_comment_in_between(self):
         self.assertListEqual([["int myFunc1", "bool myVarA", "String myVarB", "float myVarC", "", "", ""], ["arr myFunc2", "double otherVarA", "bool otherVarB", "", "", "", ""]], source_parser.parse_signature("int myFunc1(bool myVarA, String myVarB, float myVarC) {\nx++;\n}\n  //there's just a comment here\n  arr myFunc2( double otherVarA, bool otherVarB)\n{\n}", 6))
+    def test_function_call_in_body(self):
+        self.assertListEqual([["int myFunc1", "bool myVarA", "String myVarB", "float myVarC", "", "", ""], ["arr myFunc2", "double otherVarA", "bool otherVarB", "", "", "", ""]], source_parser.parse_signature("int myFunc1(bool myVarA, String myVarB, float myVarC) {\n    otherFunctionCall(x, y, zVariable, 1);\n}\n  arr myFunc2( double otherVarA, bool otherVarB)\n{\n}", 6))
+
+# TODO const and pointers and array types
+# TODO there should be tests for public and static modifiers to function declarations.
