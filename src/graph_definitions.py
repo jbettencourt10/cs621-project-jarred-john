@@ -20,11 +20,17 @@ class Parameter:
             return NotImplemented
         return self.name == other.name and self.type == other.type and self.packed == other.packed
 
+    def toJSON(self):
+        return {"name": self.name, "type": self.type, "packed": self.packed}
+
 
 class Function:
     def __init__(self, name, params):
         self.name = name
         self.parameters = params
+
+    def toJSON(self):
+        return {"name": self.name, "parameters": [p.toJSON() for p in self.parameters]}
 
 
 # FUNCTIONS
