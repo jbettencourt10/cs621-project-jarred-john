@@ -1,5 +1,4 @@
-from graph_definitions import *
-import json
+from lib.graph_definitions import *
 
 test_output = ["returnType functionName", "paramType1 varName1", "paramType2 varName2"]
 
