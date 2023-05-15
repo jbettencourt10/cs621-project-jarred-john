@@ -16,6 +16,8 @@ class BasicParamsCase(TestCase):
         self.assertListEqual([["int myFunc", "bool myVarA", "String myVarB"]], source_parser.parse_signature("  int myFunc (  bool myVarA,  String myVarB  ) {  ", 2))
     def test_newlines(self):
         self.assertListEqual([["int myFunc", "bool myVarA", "String myVarB"]], source_parser.parse_signature("int myFunc \n  (\n bool myVarA,\n  String myVarB\n)\n{\n", 2))
+    def test_multiple_spaces(self):
+        self.assertListEqual([["int myFunc", "bool myVarA", "String myVarB"]], source_parser.parse_signature("int myFunc(bool   myVarA, String    myVarB) {", 2))
 
 class MultiLineCase(TestCase):
     def test_two_functions(self):
