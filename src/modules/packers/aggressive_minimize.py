@@ -13,6 +13,7 @@ class AggressiveMinimize:
         self.packed_id = 0
         self.packed_params = {}
 
+
     # Takes in list of type Function, returns list of type Edge
     # Iterates over every pair of parameters in a function, creating an edge. Existing edges increment the cost
     def build_edges(self):
