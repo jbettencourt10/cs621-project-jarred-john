@@ -12,5 +12,8 @@ def parse_signature(source_code, max_params=10):
     regex_string = f"{beginning_characters}(?:const{space})?({declaration}){any_space}\\({(parameter(True) + '?')*(max_params)}{parameter(False)}*\\){any_space}(?:const{any_space})?\\{{.*"
     expression = regex.compile(regex_string)
     result_tuples = expression.findall(source_code)
-    result_list = list(map(lambda signature_tuple: list(signature_tuple), result_tuples))
+    result_list = list(map(lambda signature_tuple: [x for x in signature_tuple if x], result_tuples))
     return result_list
+
+if __name__ == "__main__":
+    print(parse_signature(Path("test_data/VBORenderer.cc.nocomments").read_text(), 6))
