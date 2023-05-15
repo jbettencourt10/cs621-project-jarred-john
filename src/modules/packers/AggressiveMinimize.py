@@ -1,3 +1,9 @@
+import sys
+import os
+
+# Include lib folder in path for the purpose of using lib functions
+sys.path.append(os.path.dirname(os.path.dirname(os.path.dirname(os.path.abspath(__file__)))) + "/lib")
+
 from graph_definitions import *
 
 
