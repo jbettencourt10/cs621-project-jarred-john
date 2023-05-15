@@ -27,6 +27,7 @@ class MultiLineCase(TestCase):
 class OpenScadCase(TestCase):
     def test_const_and_complex_declr(self):
         self.assertListEqual([["size_t VBORenderer::getSurfaceBufferSize", "std::shared_ptr<CSGProducts>& products", "bool highlight_mode", "bool background_mode", "bool unique_geometry"]], source_parser.parse_signature("size_t VBORenderer::getSurfaceBufferSize(const std::shared_ptr<CSGProducts>& products, bool highlight_mode, bool background_mode, bool unique_geometry) const\n{\n  size_t buffer_size = 0;", 4))
-
-# TODO const and pointers and array types
+    def test_multiple_template_params(self):
+        self.assertListEqual([['void VBORenderer::create_vertex', 'VertexArray& vertex_array', 'Color4f& color', 'std::array<Vector3d, 3>& points', 'std::array<Vector3d, 3>& normals', 'size_t active_point_index', 'size_t primitive_index']], source_parser.parse_signature("void VBORenderer::create_vertex(VertexArray& vertex_array, const Color4f& color,\n                                const std::array<Vector3d, 3>& points,\n                                const std::array<Vector3d, 3>& normals,\n                                size_t active_point_index, size_t primitive_index,\n                                double z_offset, size_t shape_size,\n                                size_t shape_dimensions, bool outlines,\n                                bool mirror) const\n{", 6))
+# TODO array types
 # TODO there should be tests for public and static modifiers to function declarations.

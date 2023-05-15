@@ -14,8 +14,3 @@ def parse_signature(source_code, max_params=10):
     result_tuples = expression.findall(source_code)
     result_list = list(map(lambda signature_tuple: list(signature_tuple), result_tuples))
     return result_list
-if __name__ == "__main__":
-    #with open("VBORenderer.cc", "r") as source_file:
-    text_contents = Path("VBORendererPreprocessed.cc").read_text()
-    results = parse_signature(text_contents, 6)
-    print(results)
