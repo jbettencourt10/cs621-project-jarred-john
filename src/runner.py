@@ -21,23 +21,6 @@ def run_frontend(frontend, source_code, max_params):
         sys.exit(1)
 
 
-def run_frontend(frontend, source_code, max_params):
-    try:
-        module_class_pair = frontend.split(".")
-        if len(module_class_pair) != 2:
-            raise ValueError
-        frontend = importlib.import_module("modules.frontends."+module_class_pair[0])
-        FrontendClass = getattr(frontend, module_class_pair[1])
-
-        frontend_obj = FrontendClass()
-        frontend_obj.parse_signature(source_code, max_params)
-        # TODO: actually create the json file bc the current json function is fucked
-
-    except (ModuleNotFoundError, ValueError, AttributeError):
-        print("Frontend not found or invalid, exiting...")
-        sys.exit(1)
-
-
 def run_packer(packer, filename):
     try:
         module_class_pair = packer.split(".")
