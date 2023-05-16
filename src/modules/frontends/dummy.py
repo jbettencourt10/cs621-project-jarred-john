@@ -1,6 +1,6 @@
 class FrontendDummy:
-    def parse_signature(self, source_code, max_params=10):
+    def parse_signature(self, filename, max_params=10):
         print("This is the dummy frontend!")
-        print("Source code given: "+source_code)
+        print("Filename: "+filename)
         print("Max parameters: "+str(max_params))
 

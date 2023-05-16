@@ -6,5 +6,6 @@ if [[ $# -ne 5 ]]; then
 fi
 
 # Insert preprocessing here:
+src/scripts/remove_comments.sh "$5"
 . venv/bin/activate
 python3 src/runner.py "$@"
