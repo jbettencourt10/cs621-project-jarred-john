@@ -1,0 +1,35 @@
+<html>
+<Title>Report
+</Title>
+<body>
+<h1>Original Code</h1>
+<img src="image1">
+<img src="image2">
+
+    <ul>
+    {% for x in originalParamList %}
+       <li>{{ x }} </li>
+    {% endfor %}
+    </ul>
+    <h1>Packed Params:</h1>
+    <ul>
+    {% for y in packedParams %}
+        <li><h3>{{ y.packed_param }}</h3></li>
+        <h3> Occurrences {{occurenceDict[y.packed_param]}}</h3>
+        Functions:
+        {% for z in functionsDict[y.packed_param] %}
+            {{z}}
+        {% endfor %}
+        <h4>List Of Parameters</h4>
+            <ul>
+           {% for z in y.parameters %}
+                <li>{{z}}</li>
+            {% endfor %}
+                </ul>
+
+    {% endfor %}
+
+    </ul>
+
+</body>
+</html>

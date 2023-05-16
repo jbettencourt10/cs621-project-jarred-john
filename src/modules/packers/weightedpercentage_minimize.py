@@ -9,7 +9,7 @@ from graph_definitions import *
 from json_creator import convert_json_to_parameter
 
 
-class AggressiveMinimize:
+class WeightedPercentageMinimize:
     def __init__(self, filename):
         with open(filename, 'r') as f:
             contents = json.loads(f.read())
@@ -38,17 +38,40 @@ class AggressiveMinimize:
                         edges[key] = Edge(p1, p2, 1)
         return list(edges.values())
 
+    #Weighted Percentage
     def combine(self):  # Combine parameters that have the heaviest edge, updating the functions
         edges = self.build_edges()  # Generate all edges
 
         if len(edges) == 0:
             return False  # Minimized
-        edges.sort(reverse=True, key=lambda x: x.cost)  # Sort by edge cost, descending
+        edgeWeights = dict()
+        #Find total edge weight for each node
+        for i in range(len(edges)):
+            if edges[i].v1 in edgeWeights:
+                edgeWeights[edges[i].v1] += edges[i].cost
+            else:
+                edgeWeights[edges[i].v1] = edges[i].cost
+            if edges[i].v2 in edgeWeights:
+                edgeWeights[edges[i].v2] += edges[i].cost
+            else:
+                edgeWeights[edges[i].v2] = edges[i].cost
+        maxPercentage = 0
+        v1 = None
+        v2 = None
+        #Find percentage of total edge weight for each parameter each edge is and multiply by edge weight
+        for x in edges:
+            perc = (x.cost * (x.cost / edgeWeights[x.v1]) + x.cost * (x.cost / edgeWeights[x.v2]))
+            if perc > maxPercentage:
+                v1 = x.v1
+                v2 = x.v2
+                maxPercentage = perc
+        #Minimized
+        if v1 is None or v2 is None:
+            return False
+        # Sort by edge cost, descending to check if done
+        edges.sort(reverse=True, key=lambda x: x.cost)
         if edges[0].cost == 1:
             return False  # Minimized
-
-        v1 = edges[0].v1
-        v2 = edges[0].v2
 
         # If both are packed
         if v1.packed and v2.packed:  # Unpack and union the set
@@ -91,7 +114,7 @@ class AggressiveMinimize:
             function.parameters = new_params
 
         return True
-   
+
     # Minimizes functions
     def minimize(self):
         while self.combine():
@@ -114,13 +137,3 @@ class AggressiveMinimize:
 
         with open(packed_name, 'w') as packed_file:
             packed_file.write(json.dumps(packed_json_data))
-
-
-if __name__ == "__main__":
-    aggressive_minimize = AggressiveMinimize("test.json")
-    aggressive_minimize.minimize()
-    minimized_functions = aggressive_minimize.functions
-    packed_params = aggressive_minimize.packed_params
-    for mfunc in minimized_functions:
-        debug_print_function(mfunc)
-    debug_print_packed_params(packed_params)
