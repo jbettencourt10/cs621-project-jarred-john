@@ -1,18 +1,22 @@
 import sys
 import os
+import json
 
 # Include lib folder in path for the purpose of using lib functions
 sys.path.append(os.path.dirname(os.path.dirname(os.path.dirname(os.path.abspath(__file__)))) + "/lib")
 
 from graph_definitions import *
+from json_creator import convert_json_to_parameter
 
 
 class AggressiveMinimize:
-    def __init__(self, functions):
-        self.functions = functions
+    def __init__(self, filename):
+        with open(filename, 'r') as f:
+            contents = json.loads(f.read())
+        self.functions = convert_json_to_parameter(contents)
         self.packed_id = 0
         self.packed_params = {}
-
+        self.filename = filename
 
     # Takes in list of type Function, returns list of type Edge
     # Iterates over every pair of parameters in a function, creating an edge. Existing edges increment the cost
@@ -246,19 +250,30 @@ class AggressiveMinimize:
         while self.combine():
             pass
 
+        functions_json_format = []
+        for func in self.functions:
+            functions_json_format.append(func.toJSON())
+
+        new_file = self.filename.split(".")[0] + "_updated.json"
+        packed_name = self.filename.split(".")[0]+"_packed.json"
+
+        with open(new_file, 'w') as output_file:
+            output_file.write(json.dumps(functions_json_format))
+
+        packed_json_data = []
+
+        for k, v in self.packed_params.items():
+            packed_json_data.append({"packed_param": k,  "parameters": [p.toJSON() for p in list(v)]})
+
+        with open(packed_name, 'w') as packed_file:
+            packed_file.write(json.dumps(packed_json_data))
+
 
 if __name__ == "__main__":
-    p1 = Parameter("foo", "int")
-    p2 = Parameter("bar", "str")
-    p3 = Parameter("baz", "int")
-    p4 = Parameter("bop", "int")
-    f1 = Function("foobar", [p1, p2])
-    f2 = Function("foobazbop", [p1, p3, p4])
-    f3 = Function("foobaz", [p1, p3])
-    aggressive_minimize = AggressiveMinimize([f1, f2, f3])
+    aggressive_minimize = AggressiveMinimize("test.json")
     aggressive_minimize.minimize()
     minimized_functions = aggressive_minimize.functions
     packed_params = aggressive_minimize.packed_params
-    for f in minimized_functions:
-        debug_print_function(f)
+    for mfunc in minimized_functions:
+        debug_print_function(mfunc)
     debug_print_packed_params(packed_params)

@@ -1,6 +1,6 @@
 #!/bin/bash
 
-if [[ $# -ne 6 ]]; then
+if [[ $# -ne 5 ]]; then
   echo "USAGE: make run FILE=filename";
   exit;
 fi
