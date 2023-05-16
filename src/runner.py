@@ -2,15 +2,15 @@ import sys
 import importlib
 
 
-def run_frontend(frontend, source_code, max_params):
+def run_frontend(frontend, filename, max_params):
     try:
         module_class_pair = frontend.split(".")
         if len(module_class_pair) != 2:
             raise ValueError
         frontend = importlib.import_module("modules.frontends."+module_class_pair[0])
         _FrontendClass = getattr(frontend, module_class_pair[1])
-        frontend_obj = _FrontendClass()
-        frontend_obj.parse_signature(source_code, max_params)
+        frontend_obj = _FrontendClass(filename, int(max_params))
+        frontend_obj.parse()
 
     except (ModuleNotFoundError, ValueError, AttributeError):
         print("Frontend not found or invalid, exiting...")
@@ -50,7 +50,7 @@ def run_visualizer(visualizer, filename):
 def run():
     print("Starting Process...")
 
-    filename = sys.argv[5]
+    filename = sys.argv[5] + ".nocomments"
 
     run_frontend(sys.argv[1], filename, sys.argv[2])
 

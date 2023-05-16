@@ -163,4 +163,5 @@ cython_debug/
 *.pdf
 
 test_data/*
+!test_data/.gitkeep
 __pycache__/

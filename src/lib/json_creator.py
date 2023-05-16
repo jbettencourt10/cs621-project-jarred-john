@@ -1,4 +1,4 @@
-from lib.graph_definitions import *
+from graph_definitions import *
 import json
 
 
