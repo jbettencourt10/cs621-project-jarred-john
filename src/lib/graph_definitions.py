@@ -32,7 +32,7 @@ class Function:
         self.parameters = params
 
     def toJSON(self):
-        return {"name": self.name, "parameters": [p.toJSON() for p in self.parameters]}
+        return {"functionName": self.name, "parameters": [p.toJSON() for p in self.parameters]}
 
 
 # FUNCTIONS

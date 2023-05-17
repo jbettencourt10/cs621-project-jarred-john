@@ -1,0 +1,44 @@
+<html>
+<head>
+    <title>Packing Report</title>
+</head>
+
+<body>
+<h1 style="text-align: center">Packing Report</h1>
+<hr/>
+<h2>Parameters: Before and After</h2>
+<img src="image1">
+<img src="image2">
+
+    <h2>Original Parameter Set:</h2>
+    <ul>
+    {% for x in originalParamList %}
+       <li>{{ x }} </li>
+    {% endfor %}
+    </ul>
+    <h2>Suggested Packings:</h2>
+    <ul>
+    {% for y in packedParams %}
+        <li><h2>{{ y.packed_param }}</h2>
+        <ul>
+            <li><h3>List Of Parameters:</h3></li>
+                <ul>
+               {% for z in y.parameters %}
+                    <li>{{z}}</li>
+                {% endfor %}
+                    </ul>
+            <li><h3> Occurrences: {{occurenceDict[y.packed_param]}}</h3></li>
+            <li><h3>Functions:</h3></li>
+            <ul>
+                {% for z in functionsDict[y.packed_param] %}
+                    <li>{{z}}</li>
+                {% endfor %}
+            </ul>
+        </ul>
+        </li>
+    {% endfor %}
+
+    </ul>
+
+</body>
+</html>

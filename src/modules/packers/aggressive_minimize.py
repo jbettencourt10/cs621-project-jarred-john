@@ -76,11 +76,14 @@ class AggressiveMinimize:
             pack_flag = False
             for param in function.parameters:
                 if param.packed:  # If param is a packing, check if they are disjoint
+                    if param.name not in self.packed_params:
+                        continue
                     packed_set = self.packed_params[param.name]
                     if packed_set.isdisjoint(combined):  # No overlap between packed sets
                         new_params.append(param)
                     else:
                         pack_flag = True
+                        del self.packed_params[param.name]
                 else:
                     if param not in combined:  # Don't include parameters in packed object
                         new_params.append(param)
