@@ -1,1 +1,1 @@
-[{"packed_param": "pack1", "parameters": ["char* section", "char* value", "char* key"]}]
+[{"packed_param": "pack7", "parameters": ["float default_value", "char* value", "uint default_value", "int default_value", "char* section", "char* key", "char* default_value", "double default_value", "bool default_value"]}]
