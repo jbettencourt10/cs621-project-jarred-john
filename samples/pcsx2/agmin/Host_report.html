@@ -1,0 +1,83 @@
+<html>
+<head>
+    <title>Packing Report</title>
+</head>
+
+<body>
+    <h1 style="text-align: center">Packing Report</h1>
+    <hr/>
+    <div style="text-align: center">
+        <h2>Parameter Graphs: Before and After</h2>
+        <img src="Host_image1">
+        <img src="Host_image2">
+    </div>
+    <hr/>
+    <h2>Original Parameter Set:</h2>
+    <ul>
+    
+       <li>char* section </li>
+    
+       <li>char* key </li>
+    
+       <li>char* default_value </li>
+    
+       <li>bool default_value </li>
+    
+       <li>int default_value </li>
+    
+       <li>uint default_value </li>
+    
+       <li>float default_value </li>
+    
+       <li>double default_value </li>
+    
+       <li>bool value </li>
+    
+       <li>int value </li>
+    
+       <li>uint value </li>
+    
+       <li>float value </li>
+    
+       <li>char* value </li>
+    
+       <li>std::vector&lt;std::string&gt;&amp; values </li>
+    
+       <li>SettingsInterface* sif </li>
+    
+    </ul>
+    <h2>Suggested Packings:</h2>
+    <ul>
+    
+        <li><h2>pack1</h2>
+        <ul>
+            <li><h3>List Of Parameters:</h3></li>
+                <ul>
+               
+                    <li>char* value</li>
+                
+                    <li>char* section</li>
+                
+                    <li>char* key</li>
+                
+                    </ul>
+            <li><h3> Occurrences: 4</h3></li>
+            <li><h3>Functions:</h3></li>
+            <ul>
+                
+                    <li>std::string Host::GetBaseStringSettingValue</li>
+                
+                    <li>void Host::SetBaseStringSettingValue</li>
+                
+                    <li>bool Host::AddBaseValueToStringList</li>
+                
+                    <li>bool Host::RemoveBaseValueFromStringList</li>
+                
+            </ul>
+        </ul>
+        </li>
+    
+
+    </ul>
+</body>
+</html>
