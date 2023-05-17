@@ -1,13 +1,11 @@
 import os.path
-
 import matplotlib.pyplot as plt
 import networkx as nx
 import json
 from jinja2 import Environment, FileSystemLoader, select_autoescape
-import io
 
 
-class Visualizer:
+class HTMLVisualizer:
     def __init__(self, filename):
         self.filename = filename.split(".")[0]
 
@@ -59,10 +57,7 @@ class Visualizer:
         nx.draw(graph, pos, with_labels=True)
         labels = {e: graph.edges[e]['weight'] for e in graph.edges}
         nx.draw_networkx_edge_labels(graph, pos, edge_labels=labels)
-        my_stringIObytes = io.BytesIO()
         plt.savefig(imageName, format='png')
-        # my_stringIObytes.seek(0)
-        # return base64.b64encode(my_stringIObytes.read())
 
     def countOccurences(self, data, paramName):
         occurences = 0
@@ -92,12 +87,11 @@ class Visualizer:
                         else:
                             functionsDict[z['packed_param']] = [x['functionName']]
         template = self.env.get_template("report.html")
-        filepath = os.path.dirname(self.filename + ".json")
         output = template.render(image1file=os.path.basename(self.filename+"_image1"),
                                  image2file=os.path.basename(self.filename+"_image2"),
                                  originalParamList=originalParamList, packedParams=packedParams,
                                  occurenceDict=occurenceDict, functionsDict=functionsDict
                                  )
 
-        outFile = open(self.filename+"_report.html", "w")
-        outFile.write(output)
+        out_file = open(self.filename+"_report.html", "w")
+        out_file.write(output)

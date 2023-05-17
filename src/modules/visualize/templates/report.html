@@ -4,12 +4,14 @@
 </head>
 
 <body>
-<h1 style="text-align: center">Packing Report</h1>
-<hr/>
-<h2>Parameters: Before and After</h2>
-<img src="{{image1file}}">
-<img src="{{image2file}}">
-
+    <h1 style="text-align: center">Packing Report</h1>
+    <hr/>
+    <div style="text-align: center">
+        <h2>Parameter Graphs: Before and After</h2>
+        <img src="{{image1file}}">
+        <img src="{{image2file}}">
+    </div>
+    <hr/>
     <h2>Original Parameter Set:</h2>
     <ul>
     {% for x in originalParamList %}
@@ -39,6 +41,5 @@
     {% endfor %}
 
     </ul>
-
 </body>
 </html>
