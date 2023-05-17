@@ -52,6 +52,8 @@ def run():
 
     filename = sys.argv[5] + ".nocomments"
 
+    print("Running frontend...")
+
     run_frontend(sys.argv[1], filename, sys.argv[2])
 
     try:
@@ -60,8 +62,10 @@ def run():
         print("Bad File")
         sys.exit(1)
 
+    print("Packing parameters...")
     run_packer(sys.argv[3], filename+".json")
 
+    print("Creating visualization...")
     run_visualizer(sys.argv[4], filename+".json")
 
     print("DONE!")
