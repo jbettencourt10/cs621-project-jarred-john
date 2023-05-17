@@ -43,7 +43,7 @@ def run_visualizer(visualizer, filename):
         visual_obj.visualize()
 
     except (ModuleNotFoundError, ValueError, AttributeError):
-        print("Packer not found or invalid, exiting...")
+        print("Visualizer not found or invalid, exiting...")
         sys.exit(1)
 
 
