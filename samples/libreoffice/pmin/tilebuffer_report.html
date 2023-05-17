@@ -1,0 +1,113 @@
+<html>
+<head>
+    <title>Packing Report</title>
+</head>
+
+<body>
+    <h1 style="text-align: center">Packing Report</h1>
+    <hr/>
+    <div style="text-align: center">
+        <h2>Parameter Graphs: Before and After</h2>
+        <img src="tilebuffer_image1">
+        <img src="tilebuffer_image2">
+    </div>
+    <hr/>
+    <h2>Original Parameter Set:</h2>
+    <ul>
+    
+       <li>float fInput </li>
+    
+       <li>float zoom </li>
+    
+       <li>cairo_surface_t *buffer </li>
+    
+       <li>int x </li>
+    
+       <li>int y </li>
+    
+       <li>float fZoom </li>
+    
+       <li>GTask* task </li>
+    
+       <li>GThreadPool* lokThreadPool </li>
+    
+       <li>cairo_surface_t *surface </li>
+    
+       <li>void* pMemory </li>
+    
+    </ul>
+    <h2>Suggested Packings:</h2>
+    <ul>
+    
+        <li><h2>pack0</h2>
+        <ul>
+            <li><h3>List Of Parameters:</h3></li>
+                <ul>
+               
+                    <li>float fInput</li>
+                
+                    <li>float zoom</li>
+                
+                    </ul>
+            <li><h3> Occurrences: 2</h3></li>
+            <li><h3>Functions:</h3></li>
+            <ul>
+                
+                    <li>float pixelToTwip</li>
+                
+                    <li>float twipToPixel</li>
+                
+            </ul>
+        </ul>
+        </li>
+    
+        <li><h2>pack2</h2>
+        <ul>
+            <li><h3>List Of Parameters:</h3></li>
+                <ul>
+               
+                    <li>int y</li>
+                
+                    <li>cairo_surface_t *surface</li>
+                
+                    <li>int x</li>
+                
+                    </ul>
+            <li><h3> Occurrences: 2</h3></li>
+            <li><h3>Functions:</h3></li>
+            <ul>
+                
+                    <li>void TileBuffer::setInvalid</li>
+                
+                    <li>void TileBuffer::setTile</li>
+                
+            </ul>
+        </ul>
+        </li>
+    
+        <li><h2>pack3</h2>
+        <ul>
+            <li><h3>List Of Parameters:</h3></li>
+                <ul>
+               
+                    <li>GThreadPool* lokThreadPool</li>
+                
+                    <li>GTask* task</li>
+                
+                    </ul>
+            <li><h3> Occurrences: 2</h3></li>
+            <li><h3>Functions:</h3></li>
+            <ul>
+                
+                    <li>void TileBuffer::setInvalid</li>
+                
+                    <li>Tile&amp; TileBuffer::getTile</li>
+                
+            </ul>
+        </ul>
+        </li>
+    
+
+    </ul>
+</body>
+</html>

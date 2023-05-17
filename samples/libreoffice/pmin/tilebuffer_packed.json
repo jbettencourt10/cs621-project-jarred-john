@@ -1,0 +1,1 @@
+[{"packed_param": "pack0", "parameters": ["float fInput", "float zoom"]}, {"packed_param": "pack2", "parameters": ["int y", "cairo_surface_t *surface", "int x"]}, {"packed_param": "pack3", "parameters": ["GThreadPool* lokThreadPool", "GTask* task"]}]
