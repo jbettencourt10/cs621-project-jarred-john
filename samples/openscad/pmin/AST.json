@@ -1,0 +1,1 @@
+[{"functionName": "bool Location::isNone", "parameters": []}, {"functionName": "std::string Location::toRelativeString", "parameters": ["std::string& docPath"]}, {"functionName": "std::string ASTNode::dump", "parameters": ["std::string& indent"]}]

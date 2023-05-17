@@ -1,0 +1,1 @@
+[{"functionName": "void AsyncFileStorage::store", "parameters": ["Path &filePath", "QByteArray &data"]}, {"functionName": "Path AsyncFileStorage::storageDir", "parameters": []}, {"functionName": "void AsyncFileStorage::store_impl", "parameters": ["Path &fileName", "QByteArray &data"]}]

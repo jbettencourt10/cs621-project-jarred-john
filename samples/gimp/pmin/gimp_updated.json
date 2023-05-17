@@ -1,0 +1,1 @@
+[{"functionName": "WINAPI\ngimp_plugin_sigfatal_handler", "parameters": ["PEXCEPTION_POINTERS pExceptionInfo"]}, {"functionName": "void\ngimp_plugin_sigfatal_handler", "parameters": ["gint sig_num"]}, {"functionName": "void\n_gimp_config", "parameters": ["GPConfig *config"]}]
