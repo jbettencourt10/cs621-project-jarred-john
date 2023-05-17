@@ -19,8 +19,8 @@ class Visualizer:
 
         filepath = os.path.dirname(self.filename + ".json")
 
-        self.buildAndSaveGraph(oldData, filepath+"/image1")
-        self.buildAndSaveGraph(newData, filepath+"/image2")
+        self.buildAndSaveGraph(oldData, self.filename+"_image1")
+        self.buildAndSaveGraph(newData, self.filename+"_image2")
         self.generateReport(oldData, newData, packs)
 
     env = Environment(
@@ -92,9 +92,12 @@ class Visualizer:
                         else:
                             functionsDict[z['packed_param']] = [x['functionName']]
         template = self.env.get_template("report.html")
-        output = template.render(originalParamList=originalParamList, packedParams=packedParams,
+        filepath = os.path.dirname(self.filename + ".json")
+        output = template.render(image1file=os.path.basename(self.filename+"_image1"),
+                                 image2file=os.path.basename(self.filename+"_image2"),
+                                 originalParamList=originalParamList, packedParams=packedParams,
                                  occurenceDict=occurenceDict, functionsDict=functionsDict
                                  )
-        filepath = os.path.dirname(self.filename + ".json")
-        outFile = open(filepath+"/report.html", "w")
+
+        outFile = open(self.filename+"_report.html", "w")
         outFile.write(output)
