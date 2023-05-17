@@ -102,14 +102,11 @@ class PercentageMinimize:
             pack_flag = False
             for param in function.parameters:
                 if param.packed:  # If param is a packing, check if they are disjoint
-                    if param.name not in self.packed_params:
-                        continue
                     packed_set = self.packed_params[param.name]
                     if packed_set.isdisjoint(combined):  # No overlap between packed sets
                         new_params.append(param)
                     else:
                         pack_flag = True
-                        del self.packed_params[param.name]
                 else:
                     if param not in combined:  # Don't include parameters in packed object
                         new_params.append(param)
@@ -121,10 +118,25 @@ class PercentageMinimize:
 
         return True
 
+    def clean_packings(self):
+        filtered_packings = {}
+        for packing in self.packed_params.keys():
+            for func in self.functions:
+                found = False
+                for param in func.parameters:
+                    if param.name == packing:
+                        filtered_packings[packing] = self.packed_params[packing]
+                        found = True
+                        break
+                if found:
+                    break
+        self.packed_params = filtered_packings
 
     def minimize(self):
         while self.combine():
             pass
+
+        self.clean_packings()
 
         functions_json_format = []
         for func in self.functions:
